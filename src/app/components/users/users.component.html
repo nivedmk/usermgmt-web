@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-row">
+            <div class="col-md-2 mb-3">
+              <button
+                class="btn btn-primary"
+                *ngIf="sessionService.isSuperUser"
+                (click)="createNewUser(null)"
+              >
+                Add New
+              </button>
+            </div>
+            <div class="col-md-5 mb-3"></div>
+          </div>
+          <div class="table-responsive mat-elevation-z8">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col" mat-sort-header="CityName">User Name</th>
+                  <th scope="col" mat-sort-header="CityName">E-Mail</th>
+                  <th scope="col" mat-sort-header="CityName">Date Of Join</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of usersList">
+                  <td scope="row">
+                    <ng-container *ngIf="sessionService.isSuperUser">
+                      <i
+                        (click)="createNewUser(user._id)"
+                        class="fa-sharp fa-solid fa-pen-to-square"
+                        style="margin-right: 1em"
+                      ></i>
+                      <i
+                        class="fa-solid fa-trash"
+                        (click)="delete(user._id)"
+                      ></i>
+                    </ng-container>
+                  </td>
+                  <td scope="row">{{ user.userName }}</td>
+                  <td scope="row">{{ user.email }}</td>
+                  <td scope="row">{{ user.dateOfJoin | date }}</td>
+                </tr>
+                <tr *ngIf="usersList && usersList.length == 0">
+                  <td style="text-align: center" scope="row" colspan="4">
+                    No Data Found.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

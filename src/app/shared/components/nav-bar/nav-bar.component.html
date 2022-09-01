@@ -1,0 +1,16 @@
+<div style="display: flex; justify-content: space-between">
+  <a class="navbar-brand" routerLink="/users">Users</a>
+  <ul class="nav">
+    <li
+      class="nav-item mt-2"
+      *ngIf="sessionService.Token"
+      style="cursor: pointer"
+    ></li>
+    <li class="nav-item" (click)="signOut()" *ngIf="sessionService.Token">
+      <a class="nav-link" style="cursor: pointer">Log Out </a>
+    </li>
+    <li class="nav-item" *ngIf="sessionService.Token">
+      <span class="nav-link">Hai {{ sessionService.UserName }} </span>
+    </li>
+  </ul>
+</div>
